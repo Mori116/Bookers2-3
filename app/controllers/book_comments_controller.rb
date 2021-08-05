@@ -1,13 +1,13 @@
 class BookCommentsController < ApplicationController
 
   def create
-    @book = Book.find(params[:book_id])
-    @comment = BookComment.new(book_comment_params)
-    @comment.user_id = current_user.id
+    book = Book.find(params[:book_id])
+    comment = BookComment.new(book_comment_params)
+    comment.user_id = current_user.id
     # 上2行を1行にしたもの。「@comment = current_user.post_comments.new(book_comment_params)」
-    @comment.book_id = @book.id
-    @comment.save
-    redirect_to book_path(@book)
+    comment.book_id = book.id
+    comment.save
+    redirect_to book_path(book)
   end
 
   def destroy
